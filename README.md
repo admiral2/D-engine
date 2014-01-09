@@ -1,4 +1,3 @@
-# Hello world!
+# D HTML5 game engine (2D/Canvas only)
 
-This is a placeholder README file for your project. Update it with information about your project,
-so others can find out more.
+HTML5 game engine with modular system
