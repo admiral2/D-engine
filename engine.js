@@ -12,6 +12,7 @@
 		_loadQueue: [],
 		_loadQueueNotReady: 0,
 		lib_path: '',
+		ua: {},
         
         $: function( selector ) {
             if ( selector[0] === "<" && selector[ selector.length - 1 ] === ">" && selector.length >= 3 ) {
@@ -231,6 +232,27 @@
             if( document.location.href.match(/\?nocache/) ) {
 			    D.setNocache( true );
 		    }
+			
+			// Probe user agent string
+			D.ua.pixelRatio = window.devicePixelRatio || 1;
+			D.ua.viewport = {
+				width: window.innerWidth,
+				height: window.innerHeight
+			};
+			D.ua.screen = {
+				width: window.screen.availWidth * D.ua.pixelRatio,
+				height: window.screen.availHeight * D.ua.pixelRatio
+			};
+			
+			var userAgent = navigator.userAgent;
+			D.ua.iPhone = /iPhone/i.test(userAgent);
+			D.ua.iPhone4 = (D.ua.iPhone && D.ua.pixelRatio == 2);
+			D.ua.iPad = /iPad/i.test(userAgent);
+			D.ua.android = /android/i.test(userAgent);
+			D.ua.winPhone = /Windows Phone/i.test(userAgent);
+			D.ua.iOS = D.ua.iPhone || D.ua.iPad;
+			D.ua.mobile = D.ua.iOS || D.ua.android || D.ua.winPhone || /mobile/i.test(userAgent);
+			D.ua.touchDevice = (('ontouchstart' in window) || ('ontouchstart' in document.documentElement) || (window.navigator.msMaxTouchPoints));
         },
 			
 			
